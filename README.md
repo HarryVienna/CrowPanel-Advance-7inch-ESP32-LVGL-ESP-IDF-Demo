@@ -4,9 +4,19 @@ This is a small demo for the ![CrowPanel Advance 7“ HMI ESP32-S3 AI-Powered IP
 
 It uses just LVGL, no other GFX library is needed!
 
-You can find a detailed explanation [on my website](https://www.haraldkreuzer.net/en/news/crowpanel-advance-7-esp32-basics-and-gui-development-lvgl-esp-idf) 
+***You can find a detailed explanation [on my website](https://www.haraldkreuzer.net/en/news/crowpanel-advance-7-esp32-basics-and-gui-development-lvgl-esp-idf)***
 
-Project structure:
+
+## This example shows:
+
+- Creating the layouts with SquareLine Studio
+- Controlling the display and touch controller
+- Events in the user interface and corresponding updates to the display
+- Changing the display from a task
+- Controlling the RTC real-time clock, the IO expander and the buzzer
+
+  
+## Project structure:
 
 <pre>
 CMakeLists.txt
@@ -36,14 +46,7 @@ src\task\time_task.c
 src\ui                                             This folder contains the Squareline Studio export
 </pre>
 
-This example shows:
 
-
-- Creating the layouts with SquareLine Studio
-- Controlling the display and touch controller
-- Events in the user interface and corresponding updates to the display
-- Changing the display from a task
-- Controlling the RTC real-time clock, the IO expander and the buzzer
 
 
 ![demo_app](https://github.com/user-attachments/assets/5b2e9cad-c5c2-48d8-8e11-7e8b55169fdf)
