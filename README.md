@@ -44,7 +44,8 @@ main\ui                                            This folder contains the EEZ-
 
 
 
+<img width="899" height="539" alt="Screenshot 2025-10-25 201129" src="https://github.com/user-attachments/assets/26bce3de-14e1-491e-9a2e-224bc8a4e47a" />
 
-![demo_app](https://github.com/user-attachments/assets/5b2e9cad-c5c2-48d8-8e11-7e8b55169fdf)
+
 
 
