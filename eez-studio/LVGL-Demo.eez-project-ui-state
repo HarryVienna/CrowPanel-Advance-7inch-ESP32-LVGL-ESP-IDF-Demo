@@ -1,7 +1,9 @@
 {
   "navigation": {
     "selectedUserPageObject": "[LVGL-Demo.eez-project]:/userPages/0",
-    "selectedActionObject": "[LVGL-Demo.eez-project]:/actions/-1",
+    "selectedStyleObject": "[LVGL-Demo.eez-project]:/lvglStyles/styles/-1",
+    "selectedFontObject": "[LVGL-Demo.eez-project]:/fonts/-1",
+    "selectedBitmapObject": "[LVGL-Demo.eez-project]:/bitmaps/-1",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -151,8 +153,7 @@
                       "enableClose": false,
                       "icon": "material:code"
                     }
-                  ],
-                  "active": true
+                  ]
                 },
                 {
                   "type": "tabset",
@@ -168,7 +169,8 @@
                       "enableClose": false,
                       "icon": "svg:hierarchy"
                     }
-                  ]
+                  ],
+                  "active": true
                 },
                 {
                   "type": "tabset",
@@ -191,31 +193,18 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 48.764309416369244,
-              "selected": 1,
+              "weight": 55.84498069169324,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
                 {
                   "type": "tab",
-                  "id": "#9f34d8b0-2064-4846-9ccb-49feb29b59fd",
-                  "name": "Settings",
-                  "component": "editor",
-                  "config": {
-                    "objectPath": "[LVGL-Demo.eez-project]:/settings",
-                    "subObjectPath": "[LVGL-Demo.eez-project]:/settings",
-                    "permanent": false
-                  },
-                  "icon": "material:settings"
-                },
-                {
-                  "type": "tab",
-                  "id": "#26a0c201-f170-49f0-acf9-0731d568255e",
+                  "id": "#ff189ce4-12a4-4034-b62b-5c1821ad891c",
                   "name": "ScreenTest",
                   "component": "editor",
                   "config": {
                     "objectPath": "[LVGL-Demo.eez-project]:/userPages/0",
-                    "permanent": false
+                    "permanent": true
                   },
                   "icon": "svg:page"
                 }
@@ -224,7 +213,7 @@
             {
               "type": "row",
               "id": "#c868a29f-91bb-4ff7-9e6f-e8b94cefd0ac",
-              "weight": 26.653134603871983,
+              "weight": 19.572463328547986,
               "children": [
                 {
                   "type": "tabset",
@@ -788,7 +777,8 @@
                       "component": "styles",
                       "enableClose": false
                     }
-                  ]
+                  ],
+                  "active": true
                 },
                 {
                   "type": "tabset",
@@ -1116,7 +1106,7 @@
       "transform": {
         "translate": {
           "x": -357.8297038693474,
-          "y": -262.3695190452978
+          "y": -162.3695190452978
         },
         "scale": 0.9
       },
@@ -1141,6 +1131,11 @@
         "position": 0,
         "secondToPx": 200,
         "scrollLeft": 0
+      }
+    },
+    "[LVGL-Demo.eez-project]:/lvglStyles/styles[tree-state]": {
+      "0": {
+        "$selected": true
       }
     }
   },

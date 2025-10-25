@@ -17,9 +17,6 @@
 #include "elecrow_advanced_7inch_800x480.h"
 
 
-#define CONFIG_DOUBLE_FB 1 // Set to 1 for double framebuffer, 0 for single framebuffer
-
-
 static const char* TAG = "DISPLAY";
 
 static esp_lcd_touch_handle_t touch_handle = NULL;  
