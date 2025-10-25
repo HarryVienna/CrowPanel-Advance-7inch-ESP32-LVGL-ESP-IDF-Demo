@@ -59,7 +59,7 @@ static esp_err_t touch_gt911_i2c_read(esp_lcd_touch_handle_t tp, uint16_t reg, u
 static esp_err_t touch_gt911_i2c_write(esp_lcd_touch_handle_t tp, uint16_t reg, uint8_t data);
 
 /* GT911 reset */
-static esp_err_t touch_gt911_reset(pca9557_handle_t expander_handle, esp_lcd_touch_handle_t tp);
+static esp_err_t touch_gt911_reset(esp_lcd_touch_handle_t tp);
 /* Read status and config register */
 static esp_err_t touch_gt911_read_cfg(esp_lcd_touch_handle_t tp);
 /* Write config register */
@@ -73,7 +73,7 @@ static esp_err_t esp_lcd_touch_gt911_exit_sleep(esp_lcd_touch_handle_t tp);
 * Public API functions
 *******************************************************************************/
 
-esp_err_t esp_lcd_touch_new_i2c_gt911(const esp_lcd_panel_io_handle_t io, const esp_lcd_touch_config_t *config, esp_lcd_touch_handle_t *out_touch, pca9557_handle_t expander_handle)
+esp_err_t esp_lcd_touch_new_i2c_gt911(const esp_lcd_panel_io_handle_t io, const esp_lcd_touch_config_t *config, esp_lcd_touch_handle_t *out_touch)
 {
     esp_err_t ret = ESP_OK;
 
@@ -131,7 +131,7 @@ esp_err_t esp_lcd_touch_new_i2c_gt911(const esp_lcd_panel_io_handle_t io, const 
     }
 
     /* Reset controller */
-    ret = touch_gt911_reset(expander_handle, esp_lcd_touch_gt911);
+    ret = touch_gt911_reset(esp_lcd_touch_gt911);
     ESP_GOTO_ON_ERROR(ret, err, TAG, "GT911 reset failed");
 
     /* Read status and config info */
@@ -354,29 +354,16 @@ static esp_err_t esp_lcd_touch_gt911_del(esp_lcd_touch_handle_t tp)
 *******************************************************************************/
 
 /* Reset controller */
-static esp_err_t touch_gt911_reset(pca9557_handle_t expander_handle, esp_lcd_touch_handle_t tp) 
+static esp_err_t touch_gt911_reset(esp_lcd_touch_handle_t tp)
 {
-    assert(expander_handle != NULL);
+    assert(tp != NULL);
 
-    ESP_LOGI(TAG, "Resetting GT911 controller");
-
-    vTaskDelay(pdMS_TO_TICKS(99));  // <100ms warten
-
-    gpio_set_direction(tp->config.int_gpio_num, GPIO_MODE_OUTPUT); // Int Pin auf Output setzen
-    pca9557_set_direction(expander_handle, 2, PCA9557_OUTPUT); // Reset Pin auf Output setzen
-
-    gpio_set_level(tp->config.int_gpio_num, 0); // INT Pin auf 0 setzen
-    pca9557_write_pin(expander_handle, 2, tp->config.levels.reset);  // Reset Pin auf 0 setzen
-
-    vTaskDelay(pdMS_TO_TICKS(11));  // >10ms warten
-
-    pca9557_write_pin(expander_handle, 2, !tp->config.levels.reset);  // Reset Pin auf 1 setzen
-
-    vTaskDelay(pdMS_TO_TICKS(6)); // >5ms warten
-  
-    gpio_set_direction(tp->config.int_gpio_num, GPIO_MODE_INPUT); // Int Pin auf Input setzen
-
-    vTaskDelay(pdMS_TO_TICKS(199)); // <200ms warten
+    if (tp->config.rst_gpio_num != GPIO_NUM_NC) {
+        ESP_RETURN_ON_ERROR(gpio_set_level(tp->config.rst_gpio_num, tp->config.levels.reset), TAG, "GPIO set level error!");
+        vTaskDelay(pdMS_TO_TICKS(10));
+        ESP_RETURN_ON_ERROR(gpio_set_level(tp->config.rst_gpio_num, !tp->config.levels.reset), TAG, "GPIO set level error!");
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
 
     return ESP_OK;
 }
@@ -461,8 +448,6 @@ static esp_err_t touch_gt911_i2c_write(esp_lcd_touch_handle_t tp, uint16_t reg, 
 {
     assert(tp != NULL);
 
-    // *INDENT-OFF*
     /* Write data */
     return esp_lcd_panel_io_tx_param(tp->io, reg, (uint8_t[]){data}, 1);
-    // *INDENT-ON*
 }

@@ -1,4 +1,5 @@
-.pio
 .vscode
-dependencies.lock
-sdkconfig.dev
+build
+managed_components
+sdkconfig
+
