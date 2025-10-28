@@ -41,20 +41,18 @@ SemaphoreHandle_t lvgl_mux;
  */
 void init_display(void)
 {
-
     i2c_master_bus_handle_t i2c_handle = NULL;
 
     init_i2c(&i2c_handle);
-    init_touch(i2c_handle, &touch_handle);
     init_extender(i2c_handle, &extender_handle);
+    init_touch(i2c_handle, &touch_handle);
     init_rtc(i2c_handle, &rtc_handle);
     init_lcd(&lcd_handle);
     init_lvgl(lcd_handle, touch_handle);
 
     set_backlight_brightness(200);
 
-    beep(1000);
-
+    beep(100);
 }
 
 
@@ -472,7 +470,7 @@ void set_backlight_brightness(uint8_t brightness) {
 
 }
 
-void beep(uint8_t duration) {
+void beep(uint16_t duration) {
 
     stc8h1k28_buzzer_on(extender_handle);
 

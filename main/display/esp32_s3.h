@@ -38,7 +38,7 @@ void lvgl_port_unlock(void);
 
 void set_backlight_brightness(uint8_t brightness);
 
-void beep(uint8_t duration);
+void beep(uint16_t duration);
 
 void set_time(uint8_t hours, uint8_t minutes, uint8_t seconds);
 
